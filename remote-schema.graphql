@@ -2,6 +2,11 @@
 
 schema {
     query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    updatePixel(color: String!, id: ID!): [Pixel]
 }
 
 type Pixel {

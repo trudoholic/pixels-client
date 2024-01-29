@@ -14,17 +14,32 @@ const client = new ApolloClient({
 
 async function loadPixelsAsync() {
   const query = gql`
-    {
-      pixels {
-        id
-        color
+      query {
+          pixels {
+              id
+              color
+          }
       }
-    }
   `
   const {data: {pixels}} = await client.query({query})
-  console.log("data.pixels", pixels)
+  console.log("data:pixels", pixels)
   return pixels
 }
+
+async function updatePixelAsync() {
+  const mutation = gql`
+      mutation {
+          updatePixel(id:"1", color: "yellow") {
+              id
+              color
+          }
+      }
+  `
+  const {data: {updatePixel}} = await client.mutate({mutation})
+  console.log("data:updatePixel", updatePixel)
+  return updatePixel
+}
+
 //
 
 const pixels = new Array(400).fill("white")
@@ -44,6 +59,7 @@ function App() {
       </div>
       <p>Apollo GraphQL</p>
       <input type="button"  value="Load Pixels" onClick={loadPixelsAsync}/>
+      <input type="button"  value="Update Pixel" onClick={updatePixelAsync}/>
     </div>
   )
 }
