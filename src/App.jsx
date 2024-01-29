@@ -26,16 +26,16 @@ async function loadPixelsAsync() {
   return pixels
 }
 
-async function updatePixelAsync() {
+async function updatePixelAsync(id, color) {
   const mutation = gql`
-      mutation {
-          updatePixel(id:"1", color: "yellow") {
+      mutation($id: ID!, $color: String!) {
+          updatePixel(id: $id, color: $color) {
               id
               color
           }
       }
   `
-  const {data: {updatePixel}} = await client.mutate({mutation})
+  const {data: {updatePixel}} = await client.mutate({mutation, variables: { id, color } })
   console.log("data:updatePixel", updatePixel)
   return updatePixel
 }
@@ -59,7 +59,7 @@ function App() {
       </div>
       <p>Apollo GraphQL</p>
       <input type="button"  value="Load Pixels" onClick={loadPixelsAsync}/>
-      <input type="button"  value="Update Pixel" onClick={updatePixelAsync}/>
+      <input type="button"  value="Update Pixel" onClick={() => updatePixelAsync("6", "purple")}/>
     </div>
   )
 }
