@@ -42,7 +42,7 @@ async function updatePixelAsync(id, color) {
 
 //
 
-const pixels = new Array(400).fill("white")
+const pixels = [...Array(400).keys()].map(k => ({id: "" + k, color: ""}))
 
 function App() {
   const [color, changeColor] = useState("white")
@@ -53,13 +53,15 @@ function App() {
       <ColorPicker changeColor={changeColor} />
       <p>Click a Pixel</p>
       <div className="container">
-        {pixels.map((pixel, idx) => (
-          <Pixel color={pixel} key={idx} newColor={color} />
+        {pixels.map(pixel => (
+          <Pixel {...pixel} key={pixel.id} newColor={color} />
         ))}
       </div>
       <p>Apollo GraphQL</p>
       <input className="btn" type="button"  value="Load Pixels" onClick={loadPixelsAsync}/>
-      <input className="btn" type="button"  value="Update Pixel" onClick={() => updatePixelAsync("6", "purple")}/>
+      <input className="btn" type="button"  value="Update Pixel" onClick={
+        () => updatePixelAsync("6", "purple")
+      }/>
     </div>
   )
 }

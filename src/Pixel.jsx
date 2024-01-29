@@ -1,12 +1,13 @@
 import { useState } from "react"
 import PropTypes from 'prop-types'
 
-const Pixel = ({ color, newColor }) => {// id,
-  const [pixelColor, changeColor] = useState(color)
+const Pixel = ({ id, color, newColor }) => {
+  const [pixelColor, changeColor] = useState(color || "white")
   return (
     <span
       className="pixel"
       onClick={() => {
+        console.log("Click:", id)
         changeColor(newColor)
       }}
       style={{backgroundColor: pixelColor}}
