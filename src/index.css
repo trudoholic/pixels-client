@@ -109,3 +109,7 @@ button:focus-visible {
   outline: 1px solid white;
   cursor: pointer;
 }
+
+.btn {
+  margin: 0 8px;
+}

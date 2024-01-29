@@ -58,8 +58,8 @@ function App() {
         ))}
       </div>
       <p>Apollo GraphQL</p>
-      <input type="button"  value="Load Pixels" onClick={loadPixelsAsync}/>
-      <input type="button"  value="Update Pixel" onClick={() => updatePixelAsync("6", "purple")}/>
+      <input className="btn" type="button"  value="Load Pixels" onClick={loadPixelsAsync}/>
+      <input className="btn" type="button"  value="Update Pixel" onClick={() => updatePixelAsync("6", "purple")}/>
     </div>
   )
 }
